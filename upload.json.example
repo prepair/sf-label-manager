@@ -1,0 +1,25 @@
+[
+  {
+    "ClassId": "PrepairUserFlowResources",
+    "Items": {
+      "demo-pass-enter-email": {
+        "Description": "Demo pass modal window, second tab.",
+        "Value": {
+          "Invariant": "Please enter user's email address to redeem Demo Pass for this session."
+        }
+      },
+      "demo-pass-buy-promo-line-1": {
+        "Description": "Demo pass modal window, first tab, one liner.",
+        "Value": {
+          "Invariant": "Presenting more than 3 times a month?"
+        }
+      },
+      "demo-pass-buy-promo-line-2": {
+        "Description": "Demo pass modal window, first tab, one liner.",
+        "Value": {
+          "Invariant": "Get these services for free!"
+        }
+      }
+    }
+  }
+]

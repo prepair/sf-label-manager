@@ -1,0 +1,11 @@
+.idea
+.DS_Store
+node_modules
+npm-debug.log
+upload.json
+output.json
+output
+daily
+*.bat
+.env
+

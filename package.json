@@ -1,0 +1,50 @@
+{
+  "name": "@prepair/sf-label-manager",
+  "version": "0.0.1",
+  "description": "Console helper for managing i18n labels using the sf-cms endpoints.",
+  "main": "index.js",
+  "scripts": {
+    "get": "node src/get.js",
+    "post": "node src/post.js",
+    "get-everything": "shx rm -rf output && shx mkdir output && node src/get-everything",
+    "daily-backup": "node src/get-everything daily all-langs",
+    "postinstall": "shx mkdir -p daily",
+    "lint": "eslint src",
+    "precommit": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prepair/sf-label-manager.git"
+  },
+  "keywords": [
+    "sfcms",
+    "i18n",
+    "label",
+    "cli"
+  ],
+  "author": "Szabolcs Kurdi <szabolcs.kurdi@gmail.com> (https://github.com/szkrd)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prepair/sf-label-manager/issues"
+  },
+  "homepage": "https://github.com/prepair/sf-label-manager#readme",
+  "dependencies": {
+    "co": "4.6.0",
+    "dotenv": "4.0.0",
+    "moment": "2.14.1",
+    "request": "2.74.0",
+    "request-promise": "4.1.0",
+    "shelljs": "0.7.4",
+    "shx": "0.1.4"
+  },
+  "devDependencies": {
+    "eslint": "3.15.0",
+    "eslint-config-semistandard": "7.0.0",
+    "eslint-config-standard": "6.2.1",
+    "eslint-plugin-promise": "3.4.1",
+    "eslint-plugin-react": "6.9.0",
+    "eslint-plugin-standard": "2.0.1",
+    "husky": "0.13.1",
+    "standard-version": "4.0.0"
+  }
+}
