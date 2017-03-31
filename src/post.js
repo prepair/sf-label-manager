@@ -24,17 +24,18 @@ try {
 for (let i = 0, l = input.length; i < l; i++) {
   const body = input[i];
   const id = Object.keys(body.Items)[0];
+  const tfsId = String(body.TaskId || 0).replace(/[^\d]/g, '');
   delete body.TaskId; // not yet implemented in the api
   request({method: 'POST', uri, body, json: true, rejectUnauthorized: false})
     .then((result) => {
       console.log(`Uploaded: ${i + 1}. (out of ${l}) - Result: ${JSON.stringify(result)}`);
       shelljs.config.silent = true;
       mkdir(backupDir);
-      let target = `${backupDir}/${now}_${fileName}`;
+      let target = `${backupDir}/${now}_#${tfsId}_${fileName}`;
       cp(fileName, target);
       console.log(`File backed up to ${target}`);
     })
     .catch(err => {
-      console.log(`Failed: ${i + 1}. [${id}] - Err: `, err.statusCode, err.statusMessage);
+      console.log(`Failed: ${i + 1}. [${id}] - Err: `, err);
     });
 }
