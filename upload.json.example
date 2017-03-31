@@ -1,6 +1,7 @@
 [
   {
     "ClassId": "PrepairUserFlowResources",
+    "TaskId": 12345,
     "Items": {
       "demo-pass-enter-email": {
         "Description": "Demo pass modal window, second tab.",
