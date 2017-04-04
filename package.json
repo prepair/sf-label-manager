@@ -6,6 +6,7 @@
   "scripts": {
     "get": "node src/get.js",
     "post": "node src/post.js",
+    "rename": "cross-env UPLOAD_FILE_NAME=rename.json node src/post.js",
     "get-everything": "shx rm -rf output && shx mkdir output && node src/get-everything",
     "daily-backup": "node src/get-everything daily all-langs",
     "postinstall": "shx mkdir -p daily",
@@ -38,6 +39,7 @@
     "shx": "0.1.4"
   },
   "devDependencies": {
+    "cross-env": "4.0.0",
     "eslint": "3.15.0",
     "eslint-config-semistandard": "7.0.0",
     "eslint-config-standard": "6.2.1",

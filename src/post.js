@@ -9,7 +9,7 @@ const uri = `${config.api}/labels`;
 console.warn('TODO: overwrite does not work, delete first');
 
 const backupDir = 'uploaded-jsons';
-const fileName = 'upload.json';
+const fileName = process.env.UPLOAD_FILE_NAME || 'upload.json';
 const now = (new Date()).toISOString().substring(0, 19).replace('T', '_').replace(/:/g, '-');
 
 let input = cat(fileName);

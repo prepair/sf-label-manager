@@ -9,3 +9,4 @@ daily
 *.bat
 .env
 uploaded-jsons
+rename.json
