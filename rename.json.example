@@ -1,15 +1,16 @@
-{
-   "ClassName" : "WizzBookingFlowResources",
-   "TaskId": 12345,
-   "KeyChanges" :
-   [
-        {
-          "OldValue" : "oldKey1",
-          "NewValue" : "newKey1"
-        },
-        {
-          "OldValue" : "oldKey2",
-          "NewValue" : "newKey2"
-        }
-  ]
-}
+[
+	{
+	   "ClassName": "WizzBookingFlowResources",
+	   "TaskId": 12345,
+	   "KeyChanges": [
+			{
+			  "OldValue": "oldKey1",
+			  "NewValue": "newKey1"
+			},
+			{
+			  "OldValue": "oldKey2",
+			  "NewValue": "newKey2"
+			}
+		]
+	}
+]

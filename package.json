@@ -6,7 +6,7 @@
   "scripts": {
     "get": "node src/get.js",
     "post": "node src/post.js",
-    "rename": "cross-env UPLOAD_FILE_NAME=rename.json node src/post.js",
+    "rename": "cross-env OPERATION=rename node src/post.js",
     "get-everything": "shx rm -rf output && shx mkdir output && node src/get-everything",
     "daily-backup": "node src/get-everything daily all-langs",
     "postinstall": "shx mkdir -p daily",
