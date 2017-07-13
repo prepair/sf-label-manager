@@ -18,6 +18,7 @@ let input = cat(fileName);
 try {
   input = JSON.parse(input);
 } catch (err) {
+  console.error(`JSON parse error. Is "${fileName}" a valid json?`, err);
   process.exit(1);
 }
 
