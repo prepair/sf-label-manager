@@ -9,8 +9,8 @@ require('dotenv').config();
 
 module.exports = {
   api: process.env.API,
-  package: process.env.package,
-  resources: process.env.resources,
+  package: process.env.PACKAGE,
+  resources: process.env.RESOURCES,
   locales: [
     'hu-HU',
     'bg-BG',

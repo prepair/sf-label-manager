@@ -35,6 +35,7 @@ if (!resourceNames.length) {
 }
 
 co(function * () {
+  console.log('Please wait... this may take some time.');
   for (let m = 0; m < langs.length; m++) {
     const lang = langs[m];
     const resources = resourceNames.reduce((acc, resName) => {
@@ -45,6 +46,7 @@ co(function * () {
     const keys = Object.keys(resources);
     for (let i = 0, l = keys.length; i < l; i++) {
       const key = keys[i];
+      console.log(`Requesting "${resources[key]}"`);
       let body = yield request({url: resources[key], rejectUnauthorized: false});
       body = body.replace(/^[^=]*=\s+/, '');
       let formatted;
