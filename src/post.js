@@ -6,8 +6,6 @@ const request = require('request-promise');
 const config = require('./config');
 const uri = `${config.api}/labels`;
 
-console.warn('TODO: overwrite does not work, delete first');
-
 const rename = process.env.OPERATION === 'rename';
 const backupDir = 'uploaded-jsons';
 const fileName = process.env.UPLOAD_FILE_NAME || (rename ? 'rename.json' : 'upload.json');
