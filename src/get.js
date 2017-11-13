@@ -18,7 +18,7 @@ const id = process.argv[4]; // calendar-months
 const url = `${config.api}/labels/?classId=${group}`;
 
 co(function * () {
-  let body = yield request({url, rejectUnauthorized: false});
+  let body = yield request({url, rejectUnauthorized: false, timeout: config.timeout});
   let ret = {};
   let formatted = '';
   try {

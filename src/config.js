@@ -8,6 +8,7 @@ require('dotenv').config();
 });
 
 module.exports = {
+  timeout: parseInt(process.env.timeout, 10) || 5000,
   api: process.env.API,
   package: process.env.PACKAGE,
   resources: process.env.RESOURCES,

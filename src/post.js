@@ -32,7 +32,7 @@ for (let i = 0, l = input.length; i < l; i++) {
   const tfsId = String(body.TaskId || 0).replace(/[^\d]/g, '');
   delete body.TaskId; // not yet implemented in the api
   console.log('Uploading.... please wait!');
-  request({method, uri, body, json: true, rejectUnauthorized: false})
+  request({method, uri, body, json: true, rejectUnauthorized: false, timeout: config.timeout})
     .then((result) => {
       console.log(`Uploaded: ${i + 1}. (out of ${l}) - Result: ${JSON.stringify(result)}`);
       shelljs.config.silent = true;
