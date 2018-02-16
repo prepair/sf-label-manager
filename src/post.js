@@ -4,7 +4,7 @@ require('shelljs/global');
 const shelljs = require('shelljs');
 const request = require('request-promise');
 const config = require('./config');
-const uri = `${config.api}/labels`;
+const uris = config.api.split(',').map(s => s + '/labels');
 
 const rename = process.env.OPERATION === 'rename';
 const backupDir = 'uploaded-jsons';
@@ -25,23 +25,37 @@ if (!input.length) {
   process.exit(1);
 }
 
-// co(function * () { --- let's hope sf can handle a bulk burst
-for (let i = 0, l = input.length; i < l; i++) {
-  const body = input[i];
-  const id = body.Items ? Object.keys(body.Items)[0] : '?';
-  const tfsId = String(body.TaskId || 0).replace(/[^\d]/g, '');
-  delete body.TaskId; // not yet implemented in the api
-  console.log('Uploading.... please wait!');
-  request({method, uri, body, json: true, rejectUnauthorized: false, timeout: config.timeout})
-    .then((result) => {
-      console.log(`Uploaded: ${i + 1}. (out of ${l}) - Result: ${JSON.stringify(result)}`);
-      shelljs.config.silent = true;
-      mkdir(backupDir);
-      let target = `${backupDir}/${now}_#${tfsId}_${fileName}`;
-      cp(fileName, target);
-      console.log(`File backed up to ${target}`);
-    })
-    .catch(err => {
-      console.log(`Failed: ${i + 1}. [${id}] - Err: `, err);
-    });
+function upload (uri, count) {
+  for (let i = 0, l = input.length; i < l; i++) {
+    const body = input[i];
+    const id = body.Items ? Object.keys(body.Items)[0] : '?';
+    const tfsId = String(body.TaskId || 0).replace(/[^\d]/g, '');
+    delete body.TaskId; // not yet implemented in the api
+    console.log('Uploading.... please wait!');
+    return request({method, uri, body, json: true, rejectUnauthorized: false, timeout: config.timeout})
+      .then((result) => {
+        console.log(`Uploaded: ${i + 1}. (out of ${l}) - Result: ${JSON.stringify(result)}`);
+        shelljs.config.silent = true;
+        mkdir(backupDir);
+        let target = `${backupDir}/${now}_#${tfsId}_${fileName}`;
+        if (count === 0) {
+          cp(fileName, target);
+          console.log(`File backed up to ${target}`);
+        }
+      })
+      .catch(err => {
+        console.log(`Failed: ${i + 1}. [${id}] - Err: `, err);
+      });
+  }
 }
+
+async function run (uri, count) {
+  if (uris.length > 1) {
+    console.info(`Uploading to ${uris.length} url(s)`);
+  }
+  for (let i = 0, l = uris.length; i < l; i++) {
+    await upload(uris[i], i);
+  }
+}
+
+run();
