@@ -18,7 +18,7 @@ if (daily) {
   }
 }
 
-const apiUrl = config.api;
+const apiUrl = config.api.replace(/,.*/, '');
 const localeMap = config.locales;
 const packageId = config.package;
 const resourceNames = (config.resources || '').split(',');

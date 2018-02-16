@@ -15,7 +15,7 @@ if (process.argv.length < 5) {
 const lang = process.argv[2]; // en-gb
 const group = process.argv[3]; // PrepairUserFlowResources
 const id = process.argv[4]; // calendar-months
-const url = `${config.api}/labels/?classId=${group}`;
+const url = `${config.api.replace(/,.*/, '')}/labels/?classId=${group}`;
 
 co(function * () {
   let body = yield request({url, rejectUnauthorized: false, timeout: config.timeout});
