@@ -22,6 +22,8 @@ PACKAGE=Prepair
 RESOURCES=PrepairUserFinderResources,PrepairUserStatusResources,PrepairErrorCodeResources,DoNotTranslateResources
 ```
 
+If you are using multiple api urls (like in the example) then the get operations (get, get-all) will use the first url from the list.
+
 ## npm scripts
 
 ### get
