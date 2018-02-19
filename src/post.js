@@ -49,6 +49,7 @@ function upload (uri, count) {
   }
 }
 
+const startTime = Date.now();
 async function run (uri, count) {
   if (uris.length > 1) {
     console.info(`Uploading to ${uris.length} url(s)`);
@@ -56,6 +57,8 @@ async function run (uri, count) {
   for (let i = 0, l = uris.length; i < l; i++) {
     await upload(uris[i], i);
   }
+  const time = (Date.now() - startTime) / 1000;
+  console.log(`Uploaded in ${time}s`);
 }
 
 run();
