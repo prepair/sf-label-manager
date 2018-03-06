@@ -9,7 +9,6 @@ Env vars (dotenv file supported):
 
 * `TIMEOUT`: timeout for request, in millisec, default is 300000 (5 minutes!)
 * `API`: sf cms dev url (or urls, separated with comma) with api part (something like https://cms.env.webdev.local/api)
-* ----
 * `PACKAGE`: for the get everything and daily backup scripts: cms package (Prepair, Foobar, Bazqux etc.)
 * `RESOURCES`: for the get everything and daily backup scripts: comma separated list of lang resources
 

@@ -13,6 +13,7 @@ const now = (new Date()).toISOString().substring(0, 19).replace('T', '_').replac
 const method = rename ? 'PUT' : 'POST';
 
 let input = cat(fileName);
+const inputSize = input.length;
 try {
   input = JSON.parse(input);
 } catch (err) {
@@ -58,7 +59,7 @@ async function run (uri, count) {
     await upload(uris[i], i);
   }
   const time = (Date.now() - startTime) / 1000;
-  console.log(`Uploaded in ${time}s`);
+  console.log(`Uploaded ${inputSize}b in ${time}s`);
 }
 
 run();
