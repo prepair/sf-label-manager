@@ -37,6 +37,8 @@ module.exports = {
     'sv-SE',
     'sr-Cyrl-CS',
     'uk-UA',
-    'ka-GE'
+    'ka-GE',
+    'el-GR',
+    'sq-AL'
   ]
 };
