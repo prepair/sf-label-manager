@@ -16,7 +16,7 @@ Example:
 
 ```shell
 TIMEOUT=10000
-API=https://cms1.dev.webdev.local/api,https://cms2.dev.webdev.local/api,https://cms3.dev.webdev.local/api
+API=https://cms.uat.webdev.local/api,https://cms.dev-actual.webdev.local/api,https://cms.dev-next.webdev.local/api,https://cms.dev-prod.webdev.local/api,https://cms.test.webdev.local/api
 PACKAGE=Prepair
 RESOURCES=PrepairUserFinderResources,PrepairUserStatusResources,PrepairErrorCodeResources,DoNotTranslateResources
 ```

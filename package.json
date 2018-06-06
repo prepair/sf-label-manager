@@ -1,6 +1,6 @@
 {
   "name": "@prepair/sf-label-manager",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Console helper for managing i18n labels using the sf-cms endpoints.",
   "main": "index.js",
   "scripts": {
