@@ -32,10 +32,11 @@ function upload (uri, count) {
     const id = body.Items ? Object.keys(body.Items)[0] : '?';
     const tfsId = String(body.TaskId || 0).replace(/[^\d]/g, '');
     delete body.TaskId; // not yet implemented in the api
-    console.log('Uploading.... please wait!');
+    const environment = uri.split('.')[1];
+    console.log(`Uploading to ${environment}.... please wait!`);
     return request({method, uri, body, json: true, rejectUnauthorized: false, timeout: config.timeout})
       .then((result) => {
-        console.log(`Uploaded: ${i + 1}. (out of ${l}) - Result: ${JSON.stringify(result)}`);
+        console.log(`Uploaded to ${environment}: ${i + 1}. (out of ${l}) - Result: ${JSON.stringify(result)}`);
         shelljs.config.silent = true;
         mkdir(backupDir);
         let target = `${backupDir}/${now}_#${tfsId}_${fileName}`;
@@ -45,7 +46,7 @@ function upload (uri, count) {
         }
       })
       .catch(err => {
-        console.log(`Failed: ${i + 1}. [${id}] - Err: `, err);
+        console.log(`Upload failed to ${environment}: ${i + 1}. [${id}] - Err: `, err);
       });
   }
 }
