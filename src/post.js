@@ -3,6 +3,7 @@
 require('shelljs/global');
 const shelljs = require('shelljs');
 const request = require('request-promise');
+require('colors');
 const config = require('./config');
 const uris = config.api.split(',').map(s => s + '/labels');
 
@@ -22,7 +23,7 @@ try {
 }
 
 if (!input.length) {
-  console.error('Payload is not an array?');
+  console.error('Payload is not an array?'.red.bold);
   process.exit(1);
 }
 
@@ -33,10 +34,10 @@ function upload (uri, count) {
     const tfsId = String(body.TaskId || 0).replace(/[^\d]/g, '');
     delete body.TaskId; // not yet implemented in the api
     const environment = uri.split('.')[1];
-    console.log(`Uploading to ${environment}.... please wait!`);
+    console.log(`Uploading to ${environment}.... please wait!`.grey);
     return request({method, uri, body, json: true, rejectUnauthorized: false, timeout: config.timeout})
       .then((result) => {
-        console.log(`Uploaded to ${environment}: ${i + 1}. (out of ${l}) - Result: ${JSON.stringify(result)}`);
+        console.log(`Uploaded to ${environment}: ${i + 1}. (out of ${l}) - Result: ${JSON.stringify(result)}`.green.bold);
         shelljs.config.silent = true;
         mkdir(backupDir);
         let target = `${backupDir}/${now}_#${tfsId}_${fileName}`;
@@ -46,7 +47,7 @@ function upload (uri, count) {
         }
       })
       .catch(err => {
-        console.log(`Upload failed to ${environment}: ${i + 1}. [${id}] - Err: `, err);
+        console.log(`Upload failed to ${environment}: ${i + 1}. [${id}] - Err: ${err.response.statusCode}`.bold.red);
       });
   }
 }
