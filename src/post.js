@@ -8,13 +8,21 @@ const config = require('./config');
 const uris = config.api.split(',').map(s => s + '/labels');
 
 const rename = process.env.OPERATION === 'rename';
+const isDeleteKeys = process.env.OPERATION === 'delete';
 const backupDir = 'uploaded-jsons';
-const fileName = process.env.UPLOAD_FILE_NAME || (rename ? 'rename.json' : 'upload.json');
-const now = (new Date()).toISOString().substring(0, 19).replace('T', '_').replace(/:/g, '-');
-const method = rename ? 'PUT' : 'POST';
+const fileName =
+  process.env.UPLOAD_FILE_NAME ||
+  (isDeleteKeys ? 'delete.json' : rename ? 'rename.json' : 'upload.json');
+const now = new Date()
+  .toISOString()
+  .substring(0, 19)
+  .replace('T', '_')
+  .replace(/:/g, '-');
+const method = isDeleteKeys ? 'DELETE' : rename ? 'PUT' : 'POST';
 
 let input = cat(fileName);
 const inputSize = input.length;
+
 try {
   input = JSON.parse(input);
 } catch (err) {
@@ -35,10 +43,21 @@ function upload (uri, count) {
     delete body.TaskId; // not yet implemented in the api
     const environment = uri.split('.')[1];
     console.log(`Uploading to ${environment}.... please wait!`.grey);
-    return request({method, uri, body, json: true, rejectUnauthorized: false, timeout: config.timeout})
-      .then((result) => {
-        console.log(`Uploaded to ${environment}: ${i + 1}. (out of ${l}) - Result: ${JSON.stringify(result)}`.green.bold);
+    return request({
+      method,
+      uri,
+      body,
+      json: true,
+      rejectUnauthorized: false,
+      timeout: config.timeout
+    })
+      .then(result => {
+        console.log(
+          `Uploaded to ${environment}: ${i +
+            1}. (out of ${l}) - Result: ${JSON.stringify(result)}`.green.bold
+        );
         shelljs.config.silent = true;
+        if (isDeleteKeys) return;
         mkdir(backupDir);
         let target = `${backupDir}/${now}_#${tfsId}_${fileName}`;
         if (count === 0) {
@@ -47,7 +66,11 @@ function upload (uri, count) {
         }
       })
       .catch(err => {
-        console.log(`Upload failed to ${environment}: ${i + 1}. [${id}] - Err: ${err.response.statusCode}`.bold.red);
+        console.log(
+          `Upload failed to ${environment}: ${i + 1}. [${id}] - Err: ${
+            err.response.statusCode
+          }`.bold.red
+        );
       });
   }
 }

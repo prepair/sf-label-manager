@@ -58,6 +58,12 @@ Output example:
 * if you want to upload into different groups then the uploader will
   do it in parallel requests. __This MAY KILL the cms api__.
 
+### delete
+
+`npm run delete` - use the _./delete.json_ file.
+
+* read label keys from delete.json and try to delete all labels
+
 ### get-everything
 
 `npm run get-everything` - download all defined groups.
