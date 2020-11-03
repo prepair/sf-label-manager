@@ -50,19 +50,18 @@ Output example:
 }
 ```
 
-### post
+### post  (deprecated)
 
-`npm run post` - uploads the _./upload.json_ file.
+~~.`npm run post` - uploads the _./upload.json_ file.~~
 
-* try to combine the labels into one big item (_./examples/upload-bfc-season-combined_)
-* if you want to upload into different groups then the uploader will
-  do it in parallel requests. __This MAY KILL the cms api__.
+~~* try to combine the labels into one big item (_./examples/upload-bfc-season-combined_)~~
+~~* if you want to upload into different groups then the uploader will~~
+~~do it in parallel requests. __This MAY KILL the cms api__.~~
 
-### delete
+### delete (deprecated)
+~~.`npm run delete` - use the _./delete.json_ file.~~
 
-`npm run delete` - use the _./delete.json_ file.
-
-* read label keys from delete.json and try to delete all labels
+~~* read label keys from delete.json and try to delete all labels~~
 
 ### get-everything
 
