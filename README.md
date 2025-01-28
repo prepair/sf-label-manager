@@ -77,3 +77,11 @@ Output example:
 
 * by default saves all languages AND all groups in the _daily_ folder
 * use cron or run it manually
+
+
+## translations.js
+Usage: `node translations.js upload.json`
+
+Tips:
+Create an alias in .zshrc
+`alias content='node translations.js upload.json'`
